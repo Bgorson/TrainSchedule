@@ -11,7 +11,9 @@
   firebase.initializeApp(config);
   var database= firebase.database();
   var trainInfo= [];
+  
   database.ref().on("value", function(snapshot) { 
+    $("tbody").html('');
     trainInfo = snapshot.val().trainInfo;
       for(i=0;i< snapshot.val().trainInfo.length;i++){  
     console.log(snapshot.val())
