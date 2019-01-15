@@ -10,14 +10,9 @@
   };
   firebase.initializeApp(config);
   var database= firebase.database();
-  var trainInfo= [{
-      name:"",
-      destination:"",
-      firstTrain: "",
-      frequency: ""
-  }];
-
+  var trainInfo= [];
   database.ref().on("value", function(snapshot) { 
+    trainInfo = snapshot.val().trainInfo;
       for(i=0;i< snapshot.val().trainInfo.length;i++){  
     console.log(snapshot.val())
     var trainName = snapshot.val().trainInfo[i].name;
@@ -45,6 +40,7 @@
 
 
 $("#submit").on("click", function(event) {
+  $("tbody").html('');
             event.preventDefault();
             // Get the input values
             var newTrainInfo= {
