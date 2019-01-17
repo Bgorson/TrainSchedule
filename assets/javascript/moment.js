@@ -40,6 +40,12 @@
           });
 
 
+//Calculating next train time
+// function nextTrain(frequency){
+//   var ts = new Date();
+//   ts = ts.toLocaleTimeString();
+
+// }
 
 $("#submit").on("click", function(event) {
   $("tbody").html('');
