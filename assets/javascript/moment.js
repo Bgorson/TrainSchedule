@@ -15,12 +15,16 @@ var database = firebase.database();
 database.ref().on("child_added", function (snapshot) {
   console.log(snapshot.key)
   var trainFrequency = snapshot.val().frequency;
+  console.log(trainFrequency+ "How frequent train comes")
   var startMinutes = parseInt((snapshot.val().firstTrain.slice(0,2)))*60 + (parseInt(snapshot.val().firstTrain.slice(3,5)))
+  console.log(startMinutes+ "When in the day by minutes does the train start")
   var now = moment().format("HH:mm")
   var nowMinutes= parseInt((now.slice(0,2)))*60 + (parseInt(now.slice(3,5)))
+  console.log(nowMinutes+ "When is the day in minutes is it right now")
   var minutesAway= trainFrequency-((nowMinutes- startMinutes) % trainFrequency) 
-  var nextArrivalHours = (Math.floor(nowMinutes + minutesAway)/60).toFixed(0)
-  console.log(nowMinutes + minutesAway)
+  console.log(minutesAway+ "How many minutes until the train comes")
+  var nextArrivalHours = (Math.floor((nowMinutes + minutesAway)/60)).toFixed(0)
+  console.log(nextArrivalHours+ "How many hours in the day will it be here")
   var nextArrivalMinutes = ((nowMinutes+minutesAway)%60)
   if ((parseInt(nextArrivalMinutes)) <10){
     nextArrivalMinutes ='0'+ nextArrivalMinutes
